@@ -1,0 +1,43 @@
+<%- include('layouts/header.ejs') %>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 mt-5">
+    <%- include('layouts/navigation.ejs') %>
+</div>
+<div class="col-8 mt-5">
+
+        <% if(Msg) { %>
+            <div class="col-md-8 alert alert-success">
+              <%= Msg %>
+            </div>
+            <% } %>
+        
+    <form method="post" class="row g-3" action="/sent" enctype="multipart/form-data">
+        <div class="col-md-8">
+            <!-- <label for="inputdata" class="form-label">To Whom</label> -->
+            <% for(let show of mydata){ %>
+            <input type="hidden" class="form-control" name="to[]" value="<%= show.email %>" required>
+            <% } %>
+          </div>
+          <div class="col-md-8">
+            <label for="inputLastname" class="form-label">Subject</label>
+            <input type="text" class="form-control" name="subject">
+          </div>
+        <div class="col-md-8">
+          <label for="inputEmail4" class="form-label">Message</label>
+         <textarea class="form-control" name="msg"></textarea>
+        </div>
+        <div class="col-md-8">
+          <label for="inputContact4" class="form-label">Attachment</label>
+          <input type="file" class="form-control" name="image">
+        </div>
+        <div class="col-8">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+</div>
+
+        </div>
+</div>
+<%- include('layouts/footer.ejs') %>
